@@ -12,6 +12,8 @@ RUN apk update && apk add --no-cache \
 	build-base \
 	python3-dev
 
+RUN rm -rf /var/cache/apk/*
+
 RUN curl --silent https://bootstrap.pypa.io/get-pip.py | python3.7
 
 # Backwards compatility.

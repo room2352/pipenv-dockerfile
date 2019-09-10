@@ -12,6 +12,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	build-essential \
 	python3.7-dev
 
+RUN apt-get clean
+
 RUN curl --silent https://bootstrap.pypa.io/get-pip.py | python3.7
 
 # Backwards compatility.
