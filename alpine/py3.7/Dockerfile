@@ -7,8 +7,7 @@ ENV LANG C.UTF-8
 ENV PYTHONDONTWRITEBYTECODE 1
 
 # -- Install Pipenv:
-# RUN apk add --no-cache curl python3-dev libffi-dev
-RUN apk add --no-cache \
+RUN apk update && apk add --no-cache \
    	curl \
 	build-base \
 	python3-dev
