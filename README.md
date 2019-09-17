@@ -1,10 +1,11 @@
 # pipenv-dockerfile
 
 Based on pipenv's official Dockerfile.
-Refere [here](https://github.com/pypa/pipenv/blob/master/Dockerfile).
+ref. [here](https://github.com/pypa/pipenv/blob/master/Dockerfile)
 
 ## Included packages
 
+### With dev packages
 * `py3.7-slim`
   * curl
   * build-essential
@@ -13,3 +14,9 @@ Refere [here](https://github.com/pypa/pipenv/blob/master/Dockerfile).
   * curl
   * build-base
   * python3-dev
+
+### Without dev packages
+* `py3.7-slim-nodev`
+  * curl
+* `py3.7-alpine-nodev`
+  * curl

@@ -37,7 +37,7 @@ ONBUILD RUN set -ex && pipenv install --deploy --system
 # - Using This File: -
 # --------------------
 
-# FROM room2352/pipenv
+# FROM room2352/pipenv:py3.7-alpine
 
 # COPY . /app
 
