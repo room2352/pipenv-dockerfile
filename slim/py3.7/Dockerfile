@@ -8,9 +8,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 
 # -- Install Pipenv:
 RUN apt-get update && apt-get install -y --no-install-recommends \
-	curl \
-	build-essential \
-	python3.7-dev
+	curl
 
 RUN apt-get clean
 
@@ -26,6 +24,11 @@ RUN set -ex && mkdir /app
 
 WORKDIR /app
 
+# -- Install additional packages:
+ONBUILD COPY packages.in packages.in
+ONBUILD RUN apt-get update && cat packages.in | xargs -n1 apt-get install -y --no-install-recommends
+ONBUILD RUN apt-get clean
+
 # -- Adding Pipfiles
 ONBUILD COPY Pipfile Pipfile
 ONBUILD COPY Pipfile.lock Pipfile.lock
@@ -37,7 +40,7 @@ ONBUILD RUN set -ex && pipenv install --deploy --system
 # - Using This File: -
 # --------------------
 
-# FROM room2352/pipenv:py3.7-slim
+# FROM room2352/pipenv:py3.7-slim-nodev
 
 # COPY . /app
 

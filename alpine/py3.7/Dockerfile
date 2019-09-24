@@ -8,9 +8,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 
 # -- Install Pipenv:
 RUN apk update && apk add --no-cache \
-   	curl \
-	build-base \
-	python3-dev
+   	curl
 
 RUN rm -rf /var/cache/apk/*
 
@@ -26,6 +24,10 @@ RUN set -ex && mkdir /app
 
 WORKDIR /app
 
+# -- Install additional packages:
+ONBUILD COPY packages.in packages.in
+ONBUILD RUN apk update && cat packages.in | xargs -n1 apk add --no-cache 
+
 # -- Adding Pipfiles
 ONBUILD COPY Pipfile Pipfile
 ONBUILD COPY Pipfile.lock Pipfile.lock
@@ -37,7 +39,7 @@ ONBUILD RUN set -ex && pipenv install --deploy --system
 # - Using This File: -
 # --------------------
 
-# FROM room2352/pipenv:py3.7-alpine
+# FROM room2352/pipenv:py3.7-alpine-nodev
 
 # COPY . /app
 
