@@ -15,8 +15,7 @@ ref. [here](https://github.com/pypa/pipenv/blob/master/Dockerfile)
 ## How to use.
 
 1. Place `packages.in` in docker context directory.
-
-List additional packages you want here.
+And list additional packages you want here.
 
     ```
     build-base
