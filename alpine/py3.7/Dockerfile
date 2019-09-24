@@ -26,7 +26,7 @@ WORKDIR /app
 
 # -- Install additional packages:
 ONBUILD COPY packages.in packages.in
-ONBUILD RUN apk update && cat packages.in | xargs -n1 apk add --no-cache 
+ONBUILD RUN apk update && cat packages.in | xargs apk add --no-cache 
 
 # -- Adding Pipfiles
 ONBUILD COPY Pipfile Pipfile

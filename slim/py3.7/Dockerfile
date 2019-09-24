@@ -26,7 +26,7 @@ WORKDIR /app
 
 # -- Install additional packages:
 ONBUILD COPY packages.in packages.in
-ONBUILD RUN apt-get update && cat packages.in | xargs -n1 apt-get install -y --no-install-recommends
+ONBUILD RUN apt-get update && cat packages.in | xargs apt-get install -y --no-install-recommends
 ONBUILD RUN apt-get clean
 
 # -- Adding Pipfiles
