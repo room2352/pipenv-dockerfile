@@ -1,6 +1,5 @@
 FROM python:3.7-alpine
 
-# ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
 # Python, don't write bytecode!
@@ -24,9 +23,9 @@ RUN set -ex && mkdir /app
 
 WORKDIR /app
 
-# -- Install additional packages:
-ONBUILD COPY packages.in packages.in
-ONBUILD RUN apk update && cat packages.in | xargs apk add --no-cache 
+# -- Install build deps:
+ONBUILD COPY builddeps.in builddeps.in
+ONBUILD RUN apk update && cat builddeps.in | xargs apk add --no-cache 
 
 # -- Adding Pipfiles
 ONBUILD COPY Pipfile Pipfile
@@ -34,6 +33,13 @@ ONBUILD COPY Pipfile.lock Pipfile.lock
 
 # -- Install dependencies:
 ONBUILD RUN set -ex && pipenv install --deploy --system
+
+# -- Uninstall build deps:
+ONBUILD RUN cat builddeps.in | xargs apk del
+
+# -- Install additional packages:
+ONBUILD COPY packages.in packages.in
+ONBUILD RUN cat packages.in | xargs apk add --no-cache 
 
 # --------------------
 # - Using This File: -

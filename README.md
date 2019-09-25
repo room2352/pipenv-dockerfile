@@ -14,12 +14,21 @@ ref. [here](https://github.com/pypa/pipenv/blob/master/Dockerfile)
 
 ## How to use.
 
-1. Place `packages.in` in docker context directory.
-And list additional packages you want here.
+1. Place `builddeps.in` in docker context directory.
 
     ```
     build-base
     python3-dev
+    ...
+    ```
+
+2. Place `packages.in` in docker context directory.
+And list additional packages you want here.
+
+    ```
+    libfoo
+    libbar
+    ...
     ```
 
 2. `Dockerfile`

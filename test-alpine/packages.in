@@ -1,2 +1,2 @@
-build-base
-python3-dev
+wget
+lz4

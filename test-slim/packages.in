@@ -1,5 +1,3 @@
-build-essential
-python3.7-dev
 libglib2.0-dev
 libsm6
 libxrender1

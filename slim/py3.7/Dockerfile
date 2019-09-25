@@ -24,10 +24,9 @@ RUN set -ex && mkdir /app
 
 WORKDIR /app
 
-# -- Install additional packages:
-ONBUILD COPY packages.in packages.in
-ONBUILD RUN apt-get update && cat packages.in | xargs apt-get install -y --no-install-recommends
-ONBUILD RUN apt-get clean
+# -- Install build deps:
+ONBUILD COPY builddeps.in builddeps.in
+ONBUILD RUN apt-get update && cat builddeps.in | xargs apt-get install -y --no-install-recommends
 
 # -- Adding Pipfiles
 ONBUILD COPY Pipfile Pipfile
@@ -35,6 +34,16 @@ ONBUILD COPY Pipfile.lock Pipfile.lock
 
 # -- Install dependencies:
 ONBUILD RUN set -ex && pipenv install --deploy --system
+
+# -- Uninstall build deps:
+ONBUILD RUN cat builddeps.in | xargs apt-get purge -y
+
+# -- Install additional packages:
+ONBUILD COPY packages.in packages.in
+ONBUILD RUN cat packages.in | xargs apt-get install -y --no-install-recommends
+
+# -- Clean up package caches.
+ONBUILD RUN apt-get autoremove -y && apt-get clean
 
 # --------------------
 # - Using This File: -
