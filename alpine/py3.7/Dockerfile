@@ -30,7 +30,7 @@ ONBUILD COPY Pipfile.lock Pipfile.lock
 
 ONBUILD RUN set -ex \
 	&& apk update && cat build-deps.in | xargs apk add --no-cache \
-	&& set -ex && pipenv install --deploy --system \
+	&& pipenv install --deploy --system \
 	&& cat build-deps.in | xargs apk del
 
 # -- Install runtime dependencies:
