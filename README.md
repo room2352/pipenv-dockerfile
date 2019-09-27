@@ -14,7 +14,8 @@ ref. [here](https://github.com/pypa/pipenv/blob/master/Dockerfile)
 
 ## How to use.
 
-1. Place `builddeps.in` in docker context directory.
+1. Place `build-deps.in` in docker context directory.
+And list build dependencies here.
 
     ```
     build-base
@@ -22,7 +23,7 @@ ref. [here](https://github.com/pypa/pipenv/blob/master/Dockerfile)
     ...
     ```
 
-2. Place `packages.in` in docker context directory.
+2. Place `runtime-deps.in` in docker context directory.
 And list additional packages you want here.
 
     ```

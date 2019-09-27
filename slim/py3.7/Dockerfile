@@ -25,8 +25,8 @@ RUN set -ex && mkdir /app
 WORKDIR /app
 
 # -- Install build deps:
-ONBUILD COPY builddeps.in builddeps.in
-ONBUILD RUN apt-get update && cat builddeps.in | xargs apt-get install -y --no-install-recommends
+ONBUILD COPY build-deps.in build-deps.in
+ONBUILD RUN apt-get update && cat build-deps.in | xargs apt-get install -y --no-install-recommends
 
 # -- Adding Pipfiles
 ONBUILD COPY Pipfile Pipfile
@@ -36,11 +36,11 @@ ONBUILD COPY Pipfile.lock Pipfile.lock
 ONBUILD RUN set -ex && pipenv install --deploy --system
 
 # -- Uninstall build deps:
-ONBUILD RUN cat builddeps.in | xargs apt-get purge -y
+ONBUILD RUN cat build-deps.in | xargs apt-get purge -y
 
 # -- Install additional packages:
-ONBUILD COPY packages.in packages.in
-ONBUILD RUN cat packages.in | xargs apt-get install -y --no-install-recommends
+ONBUILD COPY runtime-deps.in runtime-deps.in
+ONBUILD RUN cat runtime-deps.in | xargs apt-get install -y --no-install-recommends
 
 # -- Clean up package caches.
 ONBUILD RUN apt-get autoremove -y && apt-get clean
@@ -49,7 +49,7 @@ ONBUILD RUN apt-get autoremove -y && apt-get clean
 # - Using This File: -
 # --------------------
 
-# FROM room2352/pipenv:py3.7-slim-nodev
+# FROM room2352/pipenv:py3.7-slim
 
 # COPY . /app
 
