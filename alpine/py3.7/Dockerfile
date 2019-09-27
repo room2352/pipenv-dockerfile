@@ -23,23 +23,19 @@ RUN set -ex && mkdir /app
 
 WORKDIR /app
 
-# -- Install build deps:
+# -- Install build deps and python packages:
 ONBUILD COPY build-deps.in build-deps.in
-ONBUILD RUN apk update && cat build-deps.in | xargs apk add --no-cache 
-
-# -- Adding Pipfiles
 ONBUILD COPY Pipfile Pipfile
 ONBUILD COPY Pipfile.lock Pipfile.lock
 
-# -- Install dependencies:
-ONBUILD RUN set -ex && pipenv install --deploy --system
+ONBUILD RUN apk update && cat build-deps.in | xargs apk add --no-cache \
+	&& set -ex && pipenv install --deploy --system \
+	&& cat build-deps.in | xargs apk del
 
-# -- Uninstall build deps:
-ONBUILD RUN cat build-deps.in | xargs apk del
-
-# -- Install additional packages:
+# -- Install runtime dependencies:
 ONBUILD COPY runtime-deps.in runtime-deps.in
 ONBUILD RUN cat runtime-deps.in | xargs apk add --no-cache 
+
 
 # --------------------
 # - Using This File: -
