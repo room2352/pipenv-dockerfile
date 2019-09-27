@@ -29,14 +29,17 @@ ONBUILD COPY build-deps.in build-deps.in
 ONBUILD COPY Pipfile Pipfile
 ONBUILD COPY Pipfile.lock Pipfile.lock
 
-ONBUILD RUN apt-get update && cat build-deps.in | xargs apt-get install -y --no-install-recommends \
-	&& set -ex && pipenv install --deploy --system \
+ONBUILD RUN set -ex \
+	&& apt-get update \
+	&& cat build-deps.in | xargs apt-get install -y --no-install-recommends \
+	&& pipenv install --deploy --system \
 	&& cat build-deps.in | xargs apt-get purge -y \
 	&& apt-get autoremove -y && apt-get clean
 
 # -- Install runtime dependencies:
 ONBUILD COPY runtime-deps.in runtime-deps.in
-ONBUILD RUN cat runtime-deps.in | xargs apt-get install -y --no-install-recommends \
+ONBUILD RUN set -ex \
+	&& cat runtime-deps.in | xargs apt-get install -y --no-install-recommends \
 	&& apt-get clean
 
 

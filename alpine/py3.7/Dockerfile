@@ -28,13 +28,15 @@ ONBUILD COPY build-deps.in build-deps.in
 ONBUILD COPY Pipfile Pipfile
 ONBUILD COPY Pipfile.lock Pipfile.lock
 
-ONBUILD RUN apk update && cat build-deps.in | xargs apk add --no-cache \
+ONBUILD RUN set -ex \
+	&& apk update && cat build-deps.in | xargs apk add --no-cache \
 	&& set -ex && pipenv install --deploy --system \
 	&& cat build-deps.in | xargs apk del
 
 # -- Install runtime dependencies:
 ONBUILD COPY runtime-deps.in runtime-deps.in
-ONBUILD RUN cat runtime-deps.in | xargs apk add --no-cache 
+ONBUILD RUN set -ex \
+	&& cat runtime-deps.in | xargs apk add --no-cache 
 
 
 # --------------------
