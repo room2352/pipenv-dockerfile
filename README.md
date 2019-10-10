@@ -4,12 +4,16 @@ Based on pipenv's official Dockerfile.
 ref. [here](https://github.com/pypa/pipenv/blob/master/Dockerfile)
 
 
+## Supported TAGs
+
+* `py3.7-alpine`
+* `py3.7-slim`
+* `pypy3.6-slim`
+
+
 ## Included packages
 
-* `py3.7-slim`
-  * curl
-* `py3.7-alpine`
-  * curl
+* curl
 
 
 ## How to use.
