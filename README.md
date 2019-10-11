@@ -6,9 +6,9 @@ ref. [here](https://github.com/pypa/pipenv/blob/master/Dockerfile)
 
 ## Supported TAGs
 
-* `py3.7-alpine`
-* `py3.7-slim`
-* `pypy3.6-slim`
+* [`py3.7-alpine`](https://github.com/room2352/python-dockerfile/blob/master/alpine/py3.7/Dockerfile)
+* [`py3.7-slim`](https://github.com/room2352/python-dockerfile/blob/master/slim/py3.7/Dockerfile)
+* [`pypy3.6-slim`](https://github.com/room2352/python-dockerfile/blob/master/slim/pypy3.6/Dockerfile)
 
 
 ## Included packages
