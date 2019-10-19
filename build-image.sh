@@ -24,7 +24,7 @@ DOCKERFILE_PATH=./${PYTHON_NAME}/${DISTRO_NAME}/Dockerfile
 echo "${DOCKERFILE_PATH}"
 
 if [ -e $DOCKERFILE_PATH ]; then
-    cat ${DOCKERFILE_PATH} | docker build -t $IMAGE_TAG -
+    cat ${DOCKERFILE_PATH} | docker build -t "pipenv:${IMAGE_TAG}" -
 else
     usage_exit
 fi
