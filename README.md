@@ -23,7 +23,9 @@ ref. [here](https://github.com/pypa/pipenv/blob/master/Dockerfile)
 
 ## How to use.
 
-1. Put `build-deps.in` in docker context directory.
+1. Put `Pipfile` and `Pipfile.lock` in docker context directory.
+
+2. Put `build-deps.in` in docker context directory.
 And list build dependencies here.
 
     ```
@@ -32,7 +34,7 @@ And list build dependencies here.
     ...
     ```
 
-2. Put `runtime-deps.in` in docker context directory.
+3. Put `runtime-deps.in` in docker context directory.
 And list additional packages you want here.
 
     ```
@@ -41,7 +43,7 @@ And list additional packages you want here.
     ...
     ```
 
-3. `Dockerfile`
+4. `Dockerfile`
 
     ```
     FROM room2352/pipenv:{TAG}
