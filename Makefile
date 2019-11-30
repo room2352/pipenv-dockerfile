@@ -34,5 +34,7 @@ all: py3.7 py3.6 pypy3.6
 clean:
 	$(DOCKER) rmi -f $(REPO_NAME)/$(IMAGE_NAME):py3.7-alpine
 	$(DOCKER) rmi -f $(REPO_NAME)/$(IMAGE_NAME):py3.7-slim
+	$(DOCKER) rmi -f $(REPO_NAME)/$(IMAGE_NAME):py3.6-alpine
+	$(DOCKER) rmi -f $(REPO_NAME)/$(IMAGE_NAME):py3.6-slim
 	$(DOCKER) rmi -f $(REPO_NAME)/$(IMAGE_NAME):pypy3.6-slim
 
