@@ -1,0 +1,53 @@
+FROM python:3.8.0-alpine
+
+ENV LC_ALL C.UTF-8
+ENV LANG C.UTF-8
+# Python, don't write bytecode!
+ENV PYTHONDONTWRITEBYTECODE 1
+
+# -- Install Pipenv:
+RUN apk update && apk add --no-cache \
+   	curl
+
+RUN rm -rf /var/cache/apk/*
+
+RUN curl --silent https://bootstrap.pypa.io/get-pip.py | python3.8
+
+# Backwards compatility.
+RUN rm -fr /usr/local/bin/python3 && ln /usr/local/bin/python3.8 /usr/local/bin/python3
+
+RUN pip3 install --no-cache-dir pipenv
+
+# -- Install Application into container:
+RUN set -ex && mkdir /app
+
+WORKDIR /app
+
+# -- Install build deps and python packages:
+ONBUILD COPY build-deps.in build-deps.in
+ONBUILD COPY Pipfile Pipfile
+ONBUILD COPY Pipfile.lock Pipfile.lock
+
+ONBUILD RUN set -ex \
+	&& apk update && cat build-deps.in | xargs apk add --no-cache \
+	&& pipenv install --deploy --system \
+	&& rm -rf /root/.cache/pip \
+	&& rm -rf /root/.cache/pipenv \
+	&& cat build-deps.in | xargs apk del
+
+# -- Install runtime dependencies:
+ONBUILD COPY runtime-deps.in runtime-deps.in
+ONBUILD RUN set -ex \
+	&& cat runtime-deps.in | xargs apk add --no-cache 
+
+
+# --------------------
+# - Using This File: -
+# --------------------
+
+# FROM room2352/pipenv:py3.8-alpine
+
+# COPY . /app
+
+# -- Replace with the correct path to your app's main executable
+# CMD python3 main.py
