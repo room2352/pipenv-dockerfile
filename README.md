@@ -58,8 +58,3 @@ And list additional packages you want here.
 
     CMD ...
     ```
-
-
-
-## License
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Froom2352%2Fpipenv-dockerfile.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Froom2352%2Fpipenv-dockerfile?ref=badge_large)
