@@ -1,4 +1,6 @@
 # pipenv-dockerfile
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Froom2352%2Fpipenv-dockerfile.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Froom2352%2Fpipenv-dockerfile?ref=badge_shield)
+
 
 Based on pipenv's official Dockerfile.
 ref. [here](https://github.com/pypa/pipenv/blob/master/Dockerfile)
@@ -57,3 +59,7 @@ And list additional packages you want here.
     CMD ...
     ```
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Froom2352%2Fpipenv-dockerfile.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Froom2352%2Fpipenv-dockerfile?ref=badge_large)
